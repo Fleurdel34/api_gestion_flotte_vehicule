@@ -2,10 +2,7 @@ package fr.studi.transport.ws;
 
 import fr.studi.transport.pojo.Vehicule;
 import fr.studi.transport.service.VehiculeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +36,15 @@ public class VehiculeController {
     @GetMapping("/{id}")
     public Vehicule getVehiculeById(@PathVariable Long id){
         return vehiculeService.getVehiculeId(id);
+    }
+
+    @PostMapping
+    public Vehicule createVehicule(@RequestBody Vehicule vehicule){
+        return vehiculeService.createVehicule(vehicule);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteVehiculeById(@PathVariable Long id){
+        vehiculeService.deleteVehiculeById(id);
     }
 }
