@@ -2,28 +2,26 @@ package fr.studi.transport.service;
 
 import fr.studi.transport.pojo.Conducteur;
 
+import fr.studi.transport.repository.ConducteurRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+
 
 @Service
 public class ConducteurService {
 
-    //declaration et initialisation d'une liste comportant des conducteurs
-    private final List<Conducteur> conducteurList = new ArrayList<>();
-
-    //mise en place d'un compteur qui sera utilisé pour positionner les id
-    private final AtomicLong counter = new AtomicLong(1);
+    @Autowired
+    private ConducteurRepository conducteurRepository;
 
     public List<Conducteur> getAllConducteurs(){
-        return conducteurList;
+        return conducteurRepository.findAll();
 
     }
 
     public Conducteur getConducteurId(Long id){
-        return conducteurList.stream()
+        return conducteurRepository.findById(id).stream()
                 .filter(conducteur -> conducteur.getConducteurId().equals(id))
                 .findFirst()
                 .orElse(null);
