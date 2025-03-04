@@ -35,7 +35,7 @@ public class VehiculeController {
 
     @GetMapping("/{id}")
     public Vehicule getVehiculeById(@PathVariable Long id){
-        return vehiculeService.getVehiculeId(id);
+        return vehiculeService.getVehiculeById(id);
     }
 
     @PostMapping

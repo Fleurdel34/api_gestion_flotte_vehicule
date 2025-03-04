@@ -1,41 +1,42 @@
 package fr.studi.transport.service;
 
 import fr.studi.transport.pojo.Vehicule;
+import fr.studi.transport.repository.VehiculeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+
 
 
 @Service
 public class VehiculeService {
 
-    //declaration et initialisation d'une liste comportant des vehicules
-    private final List<Vehicule> vehiculeList = new ArrayList<>();
-
-    //mise en place d'un compteur qui sera utilisé pour positionner les id
-    private final AtomicLong counter = new AtomicLong(1);
+    @Autowired
+    private VehiculeRepository vehiculeRepository;
 
     public List<Vehicule> getAllVehicules(){
-        return vehiculeList;
+        return vehiculeRepository.findAll();
 
     }
 
-    public Vehicule getVehiculeId(Long id){
-        return vehiculeList.stream()
+    public Vehicule getVehiculeById(Long id){
+        return vehiculeRepository.findById(id).stream()
                 .filter(vehicule -> vehicule.getVehiculeId().equals(id))
                 .findAny()
                 .orElse(null);
     }
 
     public Vehicule createVehicule(Vehicule vehicule){
-        vehicule.setVehiculeId(counter.getAndIncrement()); // id=1, le suivant aura 2
-        vehiculeList.add(vehicule);
-        return vehicule;
+        if(vehiculeRepository.existsById(vehicule.getVehiculeId())){
+            return null;
+        }else{
+            return vehiculeRepository.save(vehicule);
+        }
     }
 
     public void deleteVehiculeById(Long id){
-        vehiculeList.removeIf(vehicule -> vehicule.getVehiculeId().equals(id));
+        vehiculeRepository.deleteById(id);
     }
 
 }

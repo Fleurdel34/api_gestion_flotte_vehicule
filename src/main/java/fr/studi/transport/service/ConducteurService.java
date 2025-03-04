@@ -20,7 +20,7 @@ public class ConducteurService {
 
     }
 
-    public Conducteur getConducteurId(Long id){
+    public Conducteur getConducteurById(Long id){
         return conducteurRepository.findById(id).stream()
                 .filter(conducteur -> conducteur.getConducteurId().equals(id))
                 .findFirst()
@@ -28,13 +28,16 @@ public class ConducteurService {
     }
 
     public Conducteur createConducteur(Conducteur conducteur){
-        conducteur.setConducteurId(counter.getAndIncrement()); // id=1, le suivant aura 2
-        conducteurList.add(conducteur);
-        return conducteur;
+        if(this.getConducteurById(conducteur.getConducteurId()) == null) {
+            return conducteurRepository.save(conducteur);
+        }else{
+            return null;
+        }
+
     }
 
     public void deleteConducteurById(Long id){
-        conducteurList.removeIf(conducteur -> conducteur.getConducteurId().equals(id));
+        conducteurRepository.deleteById(id);
     }
 
 

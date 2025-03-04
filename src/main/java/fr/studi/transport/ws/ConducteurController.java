@@ -21,7 +21,7 @@ public class ConducteurController {
 
     @GetMapping("/{id}")
     public Conducteur getConducteurById(@PathVariable Long id){
-        return conducteurService.getConducteurId(id);
+        return conducteurService.getConducteurById(id);
     }
 
     @DeleteMapping("/{id}")
