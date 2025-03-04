@@ -28,10 +28,10 @@ public class VehiculeService {
     }
 
     public Vehicule createVehicule(Vehicule vehicule){
-        if(vehiculeRepository.existsById(vehicule.getVehiculeId())){
-            return null;
+        if(vehicule.getVehiculeId()==null){
+           return vehiculeRepository.save(vehicule);
         }else{
-            return vehiculeRepository.save(vehicule);
+            return null;
         }
     }
 

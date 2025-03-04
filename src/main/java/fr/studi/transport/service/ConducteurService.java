@@ -28,7 +28,7 @@ public class ConducteurService {
     }
 
     public Conducteur createConducteur(Conducteur conducteur){
-        if(this.getConducteurById(conducteur.getConducteurId()) == null) {
+        if(conducteur.getConducteurId() == null) {
             return conducteurRepository.save(conducteur);
         }else{
             return null;
