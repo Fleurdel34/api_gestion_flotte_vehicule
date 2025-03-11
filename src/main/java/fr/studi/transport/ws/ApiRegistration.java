@@ -7,4 +7,6 @@ public class ApiRegistration {
     static final String REST_VEHICULE = "/vehicule";
 
     static final String REST_CONDUCTEUR= "/conducteur";
+
+    static  final String REST_IMMATRICULATION = "/immatriculation";
 }

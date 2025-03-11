@@ -1,16 +1,16 @@
 package fr.studi.transport.pojo;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = "immatriculation")
+)
 public class Vehicule {
 
     @Id
@@ -20,6 +20,8 @@ public class Vehicule {
     private String marque;
     private String modele;
     private Integer annee;
+    @Column(unique=true, nullable=false)
+    @
     private String immatriculation;
 
 }

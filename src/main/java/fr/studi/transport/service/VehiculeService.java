@@ -39,4 +39,7 @@ public class VehiculeService {
         vehiculeRepository.deleteById(id);
     }
 
+    public Vehicule getVehiculeByImmatriculation(String immatriculation) {
+        return vehiculeRepository.findVehiculeByImmatriculation(immatriculation);
+    }
 }
