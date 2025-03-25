@@ -52,4 +52,10 @@ public class VehiculeController {
     public Vehicule getVoitureByImmatriculation(@PathVariable String immatriculation){
        return vehiculeService.getVehiculeByImmatriculation(immatriculation);
     }
+
+    @PutMapping("/{id}")
+    public Vehicule updateVehiculeById(@PathVariable ("id") Long id, @RequestBody Vehicule vehicule){
+        return vehiculeService.updateVehiculeById(id, vehicule);
+    }
+
 }
