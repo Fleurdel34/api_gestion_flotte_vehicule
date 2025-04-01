@@ -1,4 +1,4 @@
-package fr.studi.transport.security;
+package fr.studi.transport.security.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
