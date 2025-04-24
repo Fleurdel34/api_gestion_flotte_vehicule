@@ -2,8 +2,7 @@ package fr.studi.transport.security.jwt;
 
 
 import fr.studi.transport.security.service.UserDetailsImpl;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,6 +51,16 @@ public class JwtUtils {
         try {
             Jwts.parser()
                     .setSigningKey(key()).build().parse(token);
+            return true;
+        }catch (MalformedJwtException malformedJwtException) {
+            System.out.println("Invalid JWT token:" + malformedJwtException.getMessage());
+        }catch (ExpiredJwtException e){
+            System.out.println("JWT token is expired:" + e.getMessage());
+        }catch (UnsupportedJwtException exception){
+            System.out.println("JWT token is unsupported:" + exception.getMessage());
+        }catch(IllegalArgumentException illegalArgumentException){
+            System.out.println("JWT claims string is empty:" + illegalArgumentException.getMessage());
         }
+        return false;
     }
 }
